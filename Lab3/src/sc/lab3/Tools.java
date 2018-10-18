@@ -64,4 +64,19 @@ public class Tools {
 
 		return result;
 	}
+
+	// Check if array contains no initialised elements
+	public static boolean empty(Patient[] arr) {
+		if (arr == null || arr.length == 0) {
+			return true;
+		}
+
+		for (Patient patient : arr) {
+			if (patient != null) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

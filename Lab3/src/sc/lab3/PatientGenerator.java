@@ -25,11 +25,11 @@ public class PatientGenerator {
 	}
 
 	public static int generateIdentificationNumber() {
-		return random.nextInt();
+		return random.nextInt(Integer.MAX_VALUE);
 	}
 
 	public static int generateMedicalCardNumber() {
-		return random.nextInt();
+		return random.nextInt(Integer.MAX_VALUE);
 	}
 
 	public static String generateDiagnosis() {

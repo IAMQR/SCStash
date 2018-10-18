@@ -29,7 +29,7 @@ public class Lab3 {
 					patients = Tools.addElement(patients, i++, PatientGenerator.generatePatient());
 					break;
 				case 2:
-					patients=Tools.addElement(patients, i++, askForPatient());
+					patients = Tools.addElement(patients, i++, askForPatient());
 					break;
 				default:
 					break;
@@ -63,10 +63,63 @@ public class Lab3 {
 			}
 		}
 	}
-	
+
 	private static Patient askForPatient() {
-		// TODO
-		return null;
+		System.out.println("Enter data (enter 0 for random)");
+
+		System.out.print("First Name : ");
+		String firstName = scanner.nextLine();
+		if (firstName.trim().equals("0")) {
+			firstName = PatientGenerator.generateFirstName();
+		}
+
+		System.out.print("Middle Name : ");
+		String middleName = scanner.nextLine();
+		if (middleName.trim().equals("0")) {
+			middleName = "-";
+		}
+
+		System.out.print("Last Name : ");
+		String lastName = scanner.nextLine();
+		if (lastName.trim().equals("0")) {
+			lastName = PatientGenerator.generateLastName();
+		}
+
+		System.out.print("Medical Card Number : ");
+		int mediCardN;
+		do {
+			try {
+				mediCardN = Integer.parseInt(scanner.nextLine());
+				break;
+			} catch (NumberFormatException e) { // handling incorrect input
+				System.out.println("Number conversion error");
+			}
+		} while (true);
+
+		if (mediCardN == 0) {
+			mediCardN = PatientGenerator.generateMedicalCardNumber();
+		}
+
+		System.out.print("Diagnosis : ");
+		String diagnosis = scanner.nextLine();
+		if (diagnosis.trim().equals("0")) {
+			diagnosis = PatientGenerator.generateDiagnosis();
+		}
+
+		System.out.print("Address : ");
+		String address = scanner.nextLine();
+		if (address.trim().equals("0")) {
+			address = PatientGenerator.generateAddress();
+		}
+
+		System.out.print("Phone number : ");
+		String phoneNumber = scanner.nextLine();
+		if (phoneNumber.trim().equals("0")) {
+			phoneNumber = PatientGenerator.generatePhoneNumber();
+		}
+
+		return new Patient(PatientGenerator.generateIdentificationNumber(), mediCardN, firstName, middleName, lastName,
+				address, phoneNumber, diagnosis);
 	}
 
 	private static int acceptNumber(String promptMessage, int lowerBound, int upperBound) { // Accept input while in
@@ -80,6 +133,7 @@ public class Lab3 {
 				break;
 			} catch (Exception e) {
 				System.out.println("Incorrect input, try again");
+				continue;
 			}
 		} while (number > upperBound || number < lowerBound); // Ask again if input is incorrect
 
@@ -88,19 +142,13 @@ public class Lab3 {
 	}
 
 	private static void displayPatients(Patient[] array) { // Display table of patients
-		if (array == null) {
-			System.out.println("No patients to display");
+		if (Tools.empty(array)) {
+			System.out.println("No patients to display\n");
+			return;
 		}
 
-		String format = "%-25s"; // column alignment
-		System.out.printf(format, "PatientID");
-		System.out.printf(format, "MCardN");
-		System.out.printf(format, "Diagnosis");
-		System.out.printf(format, "FirstN");
-		System.out.printf(format, "MiddleN");
-		System.out.printf(format, "LastN");
-		System.out.printf(format, "Address");
-		System.out.printf("%s%n", "PhoneN");
+		System.out.println(String.format("%-15s%-15s%-30s%-15s%-15s%-15s%-50s%s", "PatientID", "MCardN", "Diagnosis",
+				"FirstN", "MiddleN", "LastN", "Address", "PhoneN")); // Table frame
 
 		for (Patient patient : array) {
 			if (patient != null) {

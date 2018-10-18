@@ -96,7 +96,7 @@ public class Patient {
 	/* Transform all data to String for convenient output */
 
 	public String toString() {
-		return String.format("%-25d%-25d%-25s%-25s%-25s%-25s%-25s%s", identificationNumber, medicalCardNumber,
+		return String.format("%-15s%-15s%-30s%-15s%-15s%-15s%-50s%s", identificationNumber, medicalCardNumber,
 				diagnosis, firstName, middleName, lastName, address, phoneNumber);
 	}
 }
