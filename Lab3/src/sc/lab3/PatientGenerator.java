@@ -3,7 +3,6 @@ package sc.lab3;
 import java.util.Random;
 
 public class PatientGenerator {
-	// TODO Generate classes of type Patient or at least some fields to instantiate
 	private static Random random = new Random();
 
 	private static String[] diagnosisPool = { "Bacterial meningitis", "Blastocystis hominis infection",
@@ -21,42 +20,35 @@ public class PatientGenerator {
 			"746 Green Drive Rahway, NJ 07065" };
 
 	public static Patient generatePatient() {
-		// TODO
-		return null;
+		return new Patient(generateIdentificationNumber(), generateMedicalCardNumber(), generateFirstName(), "-",
+				generateLastName(), generateAddress(), generatePhoneNumber(), generateDiagnosis());
 	}
 
 	public static int generateIdentificationNumber() {
-		// TODO
-		return 0;
+		return random.nextInt();
 	}
 
 	public static int generateMedicalCardNumber() {
-		// TODO
-		return 0;
+		return random.nextInt();
 	}
 
 	public static String generateDiagnosis() {
-		// TODO
-		return null;
+		return diagnosisPool[random.nextInt(diagnosisPool.length)];
 	}
 
 	public static String generateFirstName() {
-		// TODO
-		return null;
+		return firstNamePool[random.nextInt(firstNamePool.length)];
 	}
 
 	public static String generateLastName() {
-		// TODO
-		return null;
+		return lastNamePool[random.nextInt(lastNamePool.length)];
 	}
 
 	public static String generateAddress() {
-		// TODO
-		return null;
+		return addressPool[random.nextInt(addressPool.length)];
 	}
 
 	public static String generatePhoneNumber() {
-		// TODO
-		return null;
+		return String.format("%010d", random.nextInt(Integer.MAX_VALUE));
 	}
 }
