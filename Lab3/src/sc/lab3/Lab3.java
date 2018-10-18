@@ -9,40 +9,48 @@ public class Lab3 {
 	public static void main(String[] args) {
 		Patient[] patients = new Patient[SIZE];
 		int i = 0, choice;
-		
+
 		// Main program loop
 		while (true) {
 			displayMenu();
-			choice = acceptNumber("Your choice : ");
+			choice = acceptNumber("Your choice : ", 0, 3);
 
 			switch (choice) {
-			case 1:
+			case 1: // Display patients
 				displayPatients(patients);
 				break;
-			case 2:
-				// TODO add patients (fill with random data or accept input from keyboard)
-
-				patients = Tools.addElement(patients, i, new Patient());
-				break;
-			case 3:
-				displaySearchMenu();
-				int type;
-
-				do {
-					type = acceptNumber("Your choice : ");
-				} while (type > 2 || type < 0); // Ask again if input is incorrect
-
-				if (type == 0) { // Iterate anew if 'Go back' was selected
+			case 2: // Add patients
+				displayPatientAdditionMenu();
+				choice = acceptNumber("Your choice : ", 0, 2);
+				switch (choice) {
+				case 0: // Iterate anew if 'Go back' was selected
 					continue;
-				} else if (type == 1) {
+				case 1:
+					patients = Tools.addElement(patients, i++, PatientGenerator.generatePatient());
+					break;
+				case 2:
+					patients=Tools.addElement(patients, i++, askForPatient());
+					break;
+				default:
+					break;
+				}
+				break;
+			case 3: // Search patients
+				displaySearchMenu();
+
+				choice = acceptNumber("Your choice : ", 0, 2);
+
+				if (choice == 0) { // Iterate anew if 'Go back' was selected
+					continue;
+				} else if (choice == 1) {
 					System.out.print("Diagnosis : ");
-				} else if (type == 2) {
+				} else if (choice == 2) {
 					System.out.print("Range (enter as \"StartN-EndN\") : ");
 				}
 
 				String query = scanner.nextLine().trim().toLowerCase();
 				try {
-					displayPatients(Tools.findPatients(patients, type, query));
+					displayPatients(Tools.findPatients(patients, choice, query));
 				} catch (NumberFormatException e) { // handle if Integer.parseInt in findPatients throws an exception
 					System.out.println("Number conversion error");
 				}
@@ -55,18 +63,17 @@ public class Lab3 {
 			}
 		}
 	}
-
-	private static void displayMenu() { // Display available actions
-		System.out.println("1. Display patients");
-		System.out.println("2. Add patient");
-		System.out.println("3. Find patients");
-		System.out.println("0. Exit");
+	
+	private static Patient askForPatient() {
+		// TODO
+		return null;
 	}
 
-	private static int acceptNumber(String promptMessage) { // Accept input while in menu
+	private static int acceptNumber(String promptMessage, int lowerBound, int upperBound) { // Accept input while in
+																							// menu
 		int number = 0;
 
-		while (true) {
+		do {
 			System.out.print(promptMessage);
 			try {
 				number = Integer.parseInt(scanner.nextLine());
@@ -74,14 +81,15 @@ public class Lab3 {
 			} catch (Exception e) {
 				System.out.println("Incorrect input, try again");
 			}
-		}
+		} while (number > upperBound || number < lowerBound); // Ask again if input is incorrect
 
+		System.out.println();
 		return number;
 	}
 
 	private static void displayPatients(Patient[] array) { // Display table of patients
 		if (array == null) {
-			System.out.println("No patients to diplay");
+			System.out.println("No patients to display");
 		}
 
 		String format = "%-25s"; // column alignment
@@ -99,12 +107,27 @@ public class Lab3 {
 				System.out.println(patient);
 			}
 		}
+		System.out.println();
+	}
+
+	private static void displayMenu() { // Display available actions
+		System.out.println("1. Display patients");
+		System.out.println("2. Add patient");
+		System.out.println("3. Find patients");
+		System.out.println("0. Exit");
 	}
 
 	private static void displaySearchMenu() {
 		System.out.println("Search by :");
 		System.out.println("1. Diagnosis");
 		System.out.println("2. Medical card number in range");
+		System.out.println("0. Go back");
+	}
+
+	private static void displayPatientAdditionMenu() {
+		System.out.println("Add patient :");
+		System.out.println("1. Generate random");
+		System.out.println("2. Enter manually");
 		System.out.println("0. Go back");
 	}
 }
