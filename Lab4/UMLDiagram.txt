@@ -1,0 +1,98 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Person {
+  -firstName : String
+  -lastName : String
+  -telNumber : String
+
+  +getFirstName() : String
+  +getLastName() : String
+  +getTelNumber() : String
+}
+
+class Client {
+  -billsToPay : Bill[]
+
+  +createTask(floorsNumber : int, sizeM2 : int) : Task
+  +addBill(bill : Bill) : void
+  -removeBill(bill : Bill) : void
+  +payBill(bill : Bill) : Bill
+}
+
+class Manager {
+  +registerTask(task : Task) : Order
+}
+
+class Designer {
+  +estimatePrice(order : Order) : Bill
+  +assignBill(client : Client, bill : Bill) : void
+  +assessOrder(order : Order) : BuilderTeam
+}
+
+class BuildingCompany {
+  -orders : Order[]
+  -manager : Manager
+  -designer : Designer
+
+  +addOrder(task : Task) : void
+  +completeOrder(bill : Bill) : Building
+}
+
+class Order {
+  +{final} orderNumber : int
+  +{final} client : Client
+  +{final} floorsNumber : int
+  +{final} sizeM2 : int
+}
+
+class BuilderTeam {
+  -members : Person[]
+
+  +createProject(order : Order) : Building
+  +build(b : Building) : void
+}
+
+class Task {
+  floorsNumber : int
+  sizeM2 : int
+}
+
+class Building {
+  floorsNumber : int
+  sizeM2 : int
+  isBuilt : boolean
+}
+
+class Bill {
+  +{final} sum : double
+  +{final} orderNumber : int
+  -isPaid : boolean
+
+  +getIsPaid() : boolean
+  +pay() : void
+}
+
+Person <|-- Client
+Person <|-- Manager
+Person <|-- Designer
+
+Manager "1" -- "1" Order
+Order "0..*" --* "1" BuildingCompany
+Order "1" -- "1" Designer
+Client "0..*" -- "1" Designer
+Client "1" -- "0..*" Task
+BuildingCompany "1" o-- "1" Manager
+BuildingCompany "1" o-- "1" Designer
+BuildingCompany "1" -- "0..*" Building
+Manager "1" -- "0..*" Task
+Bill "0..*" -- "1" Client
+Bill "0..*" -- "1" Designer
+Bill "0..1" -- "1" BuildingCompany
+BuilderTeam "1" o-- "0..*" Person
+BuilderTeam "0..*" -- "1" Designer
+BuilderTeam "1" -- "1..*" Order
+Task "0..1" -- "1" BuildingCompany
+Task "0..*" -- "1" Designer
+Building "0..*" -- "1" BuilderTeam
+@enduml
