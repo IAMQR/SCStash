@@ -31,12 +31,17 @@ class Designer {
 }
 
 class BuildingCompany {
+  -name : String
+
   -orders : Order[]
   -manager : Manager
   -designer : Designer
 
   +addOrder(task : Task) : void
   +completeOrder(bill : Bill) : Building
+
+  +getName() : String
+  +setName(name : String) : void
 }
 
 class Order {
@@ -54,14 +59,18 @@ class BuilderTeam {
 }
 
 class Task {
-  floorsNumber : int
-  sizeM2 : int
+  +{final} client : Client
+  +{final} floorsNumber : int
+  +{final} sizeM2 : int
 }
 
 class Building {
-  floorsNumber : int
-  sizeM2 : int
-  isBuilt : boolean
+  +{final} floorsNumber : int
+  +{final} sizeM2 : int
+  -isBuilt : boolean
+
+  +getIsBuilt() : boolean
+  ~build() : void
 }
 
 class Bill {
@@ -81,15 +90,16 @@ Manager "1" -- "1" Order
 Order "0..*" --* "1" BuildingCompany
 Order "1" -- "1" Designer
 Client "0..*" -- "1" Designer
+Client "1" --o "0..*" Order
 Client "1" -- "0..*" Task
-BuildingCompany "1" o-- "1" Manager
-BuildingCompany "1" o-- "1" Designer
+BuildingCompany "1" *-- "1" Manager
+BuildingCompany "1" *-- "1" Designer
 BuildingCompany "1" -- "0..*" Building
 Manager "1" -- "0..*" Task
 Bill "0..*" -- "1" Client
 Bill "0..*" -- "1" Designer
 Bill "0..1" -- "1" BuildingCompany
-BuilderTeam "1" o-- "0..*" Person
+BuilderTeam "1" *-- "0..*" Person
 BuilderTeam "0..*" -- "1" Designer
 BuilderTeam "1" -- "1..*" Order
 Task "0..1" -- "1" BuildingCompany
