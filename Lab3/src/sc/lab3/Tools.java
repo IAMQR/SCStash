@@ -27,7 +27,7 @@ public class Tools {
 			if (patients[i] == null) {
 				continue;
 			} else if (diagnosis.equals(patients[i].getDiagnosis())) {
-				result = addElement(patients, j++, patients[i]);
+				result = addElement(result, j++, patients[i]);
 			}
 		}
 
@@ -42,7 +42,7 @@ public class Tools {
 			if (patients[i] == null) {
 				continue;
 			} else if (patients[i].getMedicalCardNumber() >= start && patients[i].getMedicalCardNumber() <= finish) {
-				result = addElement(patients, j++, patients[i]);
+				result = addElement(result, j++, patients[i]);
 			}
 		}
 

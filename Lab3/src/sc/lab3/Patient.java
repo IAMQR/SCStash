@@ -46,7 +46,7 @@ public class Patient {
 	}
 
 	public String getDiagnosis() {
-		return diagnosis;
+		return diagnosis.toLowerCase().trim();
 	}
 
 	public void setDiagnosis(String d) {
@@ -54,7 +54,7 @@ public class Patient {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstName.toLowerCase().trim();
 	}
 
 	public void setFirstName(String f) {
@@ -62,7 +62,7 @@ public class Patient {
 	}
 
 	public String getMiddleName() {
-		return middleName;
+		return middleName.toLowerCase().trim();
 	}
 
 	public void setMiddleName(String m) {
@@ -70,7 +70,7 @@ public class Patient {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastName.toLowerCase().trim();
 	}
 
 	public void setLastName(String l) {
@@ -78,7 +78,7 @@ public class Patient {
 	}
 
 	public String getAddress() {
-		return address;
+		return address.toLowerCase().trim();
 	}
 
 	public void setAddress(String a) {
@@ -86,7 +86,7 @@ public class Patient {
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber;
+		return phoneNumber.toLowerCase().trim();
 	}
 
 	public void setPhoneNumber(String phoneNumber) {

@@ -85,9 +85,10 @@ public class Lab3 {
 			lastName = PatientGenerator.generateLastName();
 		}
 
-		System.out.print("Medical Card Number : ");
 		int mediCardN;
 		do {
+			System.out.print("Medical Card Number : ");
+			
 			try {
 				mediCardN = Integer.parseInt(scanner.nextLine());
 				break;
