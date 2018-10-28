@@ -1,13 +1,13 @@
 package sc.lab4;
 
 public class Bill {
-	public final double sum;
 	public final int orderNumber;
+	public final double sum;
 	private boolean paid; // true if bill has been paid
 
-	public Bill(double sum, int orderNumber) {
-		this.sum = sum;
+	public Bill(int orderNumber, double sum) {
 		this.orderNumber = orderNumber;
+		this.sum = sum;
 	}
 
 	public boolean isPaid() {

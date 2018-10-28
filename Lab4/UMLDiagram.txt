@@ -14,30 +14,31 @@ class Person {
 class Client {
   -billsToPay : Bill[]
 
+  -getFreeElement(bills : billsToPay[]) : int
   +createTask(floorsNumber : int, sizeM2 : int) : Task
   +addBill(bill : Bill) : void
-  -removeBill(bill : Bill) : void
-  +payBill(bill : Bill) : Bill
+  +payBill(bill : Bill) : void
 }
 
 class Manager {
-  +registerTask(task : Task) : Order
+  ~registerTask(task : Task, bill : Bill) : Order
 }
 
 class Designer {
-  +estimatePrice(order : Order) : Bill
-  +assignBill(client : Client, bill : Bill) : void
-  +assessOrder(order : Order) : BuilderTeam
+  ~estimatePrice(task : Task, orderNumber : int) : Bill
+  ~assignBill(order : Order) : void
+  ~assessOrder(order : Order) : BuilderTeam
 }
 
 class BuildingCompany {
   -name : String
-
   -orders : Order[]
   -manager : Manager
   -designer : Designer
 
-  +addOrder(task : Task) : void
+  -getFreeElement(orders : Order[]) : int
+
+  +addOrder(task : Task) : Bill
   +completeOrder(bill : Bill) : Building
 
   +getName() : String
@@ -45,17 +46,15 @@ class BuildingCompany {
 }
 
 class Order {
-  +{final} orderNumber : int
-  +{final} client : Client
-  +{final} floorsNumber : int
-  +{final} sizeM2 : int
+  +{final} task : Task
+  +{final} bill : Bill
 }
 
 class BuilderTeam {
   -members : Person[]
 
-  +createProject(order : Order) : Building
-  +build(b : Building) : void
+  ~createProject(order : Order) : Building
+  ~build(b : Building) : void
 }
 
 class Task {
@@ -82,27 +81,32 @@ class Bill {
   +pay() : void
 }
 
+
 Person <|-- Client
 Person <|-- Manager
 Person <|-- Designer
 
-Manager "1" -- "1" Order
-Order "0..*" --* "1" BuildingCompany
-Order "1" -- "1" Designer
-Client "0..*" -- "1" Designer
-Client "1" --o "0..*" Order
-Client "1" -- "0..*" Task
 BuildingCompany "1" *-- "1" Manager
 BuildingCompany "1" *-- "1" Designer
 BuildingCompany "1" -- "0..*" Building
+BuildingCompany "1" -- "0..*" Bill
+BuildingCompany "1" -- "0..*" Task
+BuildingCompany "1" *-- "0..*" Order
+
+Client "1" --o "0..*" Task
+Client "0..*" -- "1" Designer
+Client "1" o-- "0..10" Bill
+
+Manager "1" -- "0..*" Order
 Manager "1" -- "0..*" Task
-Bill "0..*" -- "1" Client
-Bill "0..*" -- "1" Designer
-Bill "0..1" -- "1" BuildingCompany
+Manager "1" -- "0..*" Bill
+
+Designer "1" -- "0..*" Order
+Designer "1" -- "0..*" Bill
+Designer "1" -- "0..*" Task
+Designer "1" -- "0..*" BuilderTeam
+
 BuilderTeam "1" *-- "0..*" Person
-BuilderTeam "0..*" -- "1" Designer
 BuilderTeam "1" -- "1..*" Order
-Task "0..1" -- "1" BuildingCompany
-Task "0..*" -- "1" Designer
-Building "0..*" -- "1" BuilderTeam
+BuilderTeam "1" -- "1" Building
 @enduml

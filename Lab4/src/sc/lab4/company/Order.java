@@ -1,17 +1,14 @@
 package sc.lab4.company;
 
-import sc.lab4.Client;
+import sc.lab4.Bill;
+import sc.lab4.Task;
 
-public class Order {
-	public final int orderNumber;
-	public final Client client;
-	public final int floorsNumber;
-	public final int sizeM2;
+class Order {
+	public final Task task;
+	public final Bill bill;
 
-	Order(int orderNumber, Client client, int floorsNumber, int sizeM2) {
-		this.orderNumber = orderNumber;
-		this.client = client;
-		this.floorsNumber = floorsNumber;
-		this.sizeM2 = sizeM2;
+	Order(Task task, Bill bill) {
+		this.task = task;
+		this.bill = bill;
 	}
 }

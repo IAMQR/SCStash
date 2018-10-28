@@ -5,6 +5,12 @@ public class Person {
 	private String lastName;
 	private String telNumber;
 
+	public Person() {
+		firstName = null;
+		lastName = null;
+		telNumber = null;
+	}
+
 	public Person(String firstName, String lastName, String telNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;

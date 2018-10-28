@@ -1,23 +1,23 @@
 package sc.lab4.company;
 
+import sc.lab4.Bill;
 import sc.lab4.Person;
 import sc.lab4.Task;
 
 public class Manager extends Person {
-
-	private BuildingCompany placeOfWork;
-
-	public Manager(String firstName, String lastName, String telNumber, BuildingCompany placeOfWork) {
-		super(firstName, lastName, telNumber);
-		this.placeOfWork = placeOfWork;
+	public Manager() {
+		super();
 	}
 
-	public Order registerTask(Task task) throws Exception {
-		int orderIndex = placeOfWork.getFreeElement();
-		if (orderIndex == -1) {
-			throw new Exception(System.out.format("%s is busy, try again later.", placeOfWork.getName()).toString());
+	public Manager(String firstName, String lastName, String telNumber) {
+		super(firstName, lastName, telNumber);
+	}
+
+	Order registerTask(Task task, Bill bill) throws Exception {
+		if (task.floorsNumber < 1 || task.sizeM2 < 1) {
+			throw new IllegalArgumentException("Argument should be greater than 0");
 		}
 
-		return new Order(orderIndex, task.client, task.floorsNumber, task.sizeM2);
+		return new Order(task, bill);
 	}
 }
