@@ -13,7 +13,7 @@ public class Manager extends Person {
 		super(firstName, lastName, telNumber);
 	}
 
-	Order registerTask(Task task, Bill bill) throws Exception {
+	Order registerTask(Task task, Bill bill) throws Exception { // Create an instance of Order with task and bill inside
 		if (task.floorsNumber < 1 || task.sizeM2 < 1) {
 			throw new IllegalArgumentException("Argument should be greater than 0");
 		}

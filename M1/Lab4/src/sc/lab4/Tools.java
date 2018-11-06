@@ -16,6 +16,8 @@ public class Tools {
 
 		return -1;
 	}
+	
+	// Accept integer number as input
 
 	public static int acceptNumber(String promptMessage) {
 		int number = 0;

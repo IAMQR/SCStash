@@ -1,11 +1,12 @@
 package sc.lab4.company;
 
 import sc.lab4.Bill;
-import sc.lab4.Client;
 import sc.lab4.Person;
 import sc.lab4.Task;
 
 public class Designer extends Person {
+	// Constructors
+	
 	public Designer() {
 		super();
 	}

@@ -2,8 +2,6 @@ package sc.lab1;
 
 import java.util.Random;
 
-// TODO Calculate sum of elements in the same loop where we find indices
-
 public class Lab1 {
 	public static void main(String[] args) {
 		int size = 0;
@@ -32,21 +30,21 @@ public class Lab1 {
 			for (int j = 0; j < size; j++)
 				arr[i][j] = random.nextDouble() - 0.5;
 
-		int firstX, firstY, secondX, secondY; // Declare variables to store indices
-		firstX = firstY = secondX = secondY = -1;
+		boolean inside = false; // if true - calculate every elements until a negative element is reached
+		double sum = 0;
 
 		exit: {
-			for (int i = 0; i < size; i++) // Get indices of first and second negative elements
+			for (int i = 0; i < size; i++)
 				for (int j = 0; j < size; j++) {
-					if (arr[i][j] < 0) {
-						if (firstX == -1) {
-							firstY = secondY = i;
-							firstX = secondX = j;
-						} else {
-							secondY = i;
-							secondX = j;
-							break exit;
-						}
+					if (arr[i][j] < 0 && !inside) { // Find first negative element
+						inside = true;
+						continue;
+					} else if (arr[i][j] < 0) {
+						break exit;
+					}
+
+					if (inside) {
+						sum += arr[i][j]; // Calculate sum of elements between first and second negative numbers
 					}
 				}
 		}
@@ -60,25 +58,6 @@ public class Lab1 {
 					System.out.println();
 				}
 			}
-
-		double sum = 0;
-
-		exit: {
-			for (int i = firstY; i < size; i++) // Calculate sum of elements between first and second negative numbers
-				for (int j = firstX; j < size; j++) {
-					if (i == firstY && j == firstX) {
-						j++;
-
-						if (j == size) {
-							break;
-						}
-					}
-					if (i == secondY && j >= secondX) {
-						break exit;
-					}
-					sum += arr[i][j];
-				}
-		}
 
 		System.out.format("\nSum : %f", sum);
 	}

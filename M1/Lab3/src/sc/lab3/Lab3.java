@@ -88,10 +88,14 @@ public class Lab3 {
 		int mediCardN;
 		do {
 			System.out.print("Medical Card Number : ");
-			
+
 			try {
 				mediCardN = Integer.parseInt(scanner.nextLine());
-				break;
+				if (mediCardN >= 0) {
+					break;
+				} else {
+					System.out.println("Number should be greater tha 0!");
+				}
 			} catch (NumberFormatException e) { // handling incorrect input
 				System.out.println("Number conversion error");
 			}
