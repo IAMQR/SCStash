@@ -20,8 +20,8 @@ public class PatientGenerator {
 			"746 Green Drive Rahway, NJ 07065" };
 
 	public static Patient generatePatient() {
-		return new Patient(generateIdentificationNumber(), generateMedicalCardNumber(), generateFirstName(), "-",
-				generateLastName(), generateAddress(), generatePhoneNumber(), generateDiagnosis());
+		return new Patient(generateIdentificationNumber(), generateMedicalCardNumber(), generateFirstName(), generateLastName(), generateAddress(),
+				generatePhoneNumber(), generateDiagnosis());
 	}
 
 	public static int generateIdentificationNumber() {

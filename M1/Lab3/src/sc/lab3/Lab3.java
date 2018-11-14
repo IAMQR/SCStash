@@ -129,7 +129,7 @@ public class Lab3 {
 
 	private static int acceptNumber(String promptMessage, int lowerBound, int upperBound) { // Accept input while in
 																							// menu
-		int number = 0;
+		int number = -1;
 
 		do {
 			System.out.print(promptMessage);

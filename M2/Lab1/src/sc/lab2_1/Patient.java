@@ -5,7 +5,6 @@ public class Patient {
 	private int medicalCardNumber;
 	private String diagnosis;
 	private String firstName;
-	private String middleName;
 	private String lastName;
 	private String address;
 	private String phoneNumber;
@@ -15,16 +14,15 @@ public class Patient {
 	public Patient() {
 	}
 
-	public Patient(int ididentificationNumber, int medicalCardNumber, String firstName, String middleName,
-			String lastName, String address, String phoneNumber, String diagnosis) {
-		this.identificationNumber = ididentificationNumber;
+	public Patient(int identificationNumber, int medicalCardNumber, String firstName, String lastName, String address,
+			String phoneNumber, String diagnosis) {
+		this.identificationNumber = identificationNumber;
 		this.medicalCardNumber = medicalCardNumber;
-		this.diagnosis = diagnosis;
 		this.firstName = firstName;
-		this.middleName = middleName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
+		this.diagnosis = diagnosis;
 	}
 
 	/* Accessor and mutator methods */
@@ -46,47 +44,39 @@ public class Patient {
 	}
 
 	public String getDiagnosis() {
-		return diagnosis.toLowerCase().trim();
+		return diagnosis;
 	}
 
-	public void setDiagnosis(String d) {
-		diagnosis = d;
+	public void setDiagnosis(String diagnosis) {
+		this.diagnosis = diagnosis;
 	}
 
 	public String getFirstName() {
-		return firstName.toLowerCase().trim();
+		return firstName;
 	}
 
-	public void setFirstName(String f) {
-		firstName = f;
-	}
-
-	public String getMiddleName() {
-		return middleName.toLowerCase().trim();
-	}
-
-	public void setMiddleName(String m) {
-		middleName = m;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return lastName.toLowerCase().trim();
+		return lastName;
 	}
 
-	public void setLastName(String l) {
-		lastName = l;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getAddress() {
-		return address.toLowerCase().trim();
+		return address;
 	}
 
-	public void setAddress(String a) {
-		address = a;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getPhoneNumber() {
-		return phoneNumber.toLowerCase().trim();
+		return phoneNumber;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
@@ -97,7 +87,7 @@ public class Patient {
 
 	@Override
 	public String toString() {
-		return String.format("%-15s%-15s%-30s%-15s%-15s%-15s%-50s%s", identificationNumber, medicalCardNumber,
-				diagnosis, firstName, middleName, lastName, address, phoneNumber);
+		return String.format("%-15s%-15s%-31s%-15s%-15s%-50s%s", identificationNumber, medicalCardNumber, diagnosis,
+				firstName, lastName, address, phoneNumber);
 	}
 }

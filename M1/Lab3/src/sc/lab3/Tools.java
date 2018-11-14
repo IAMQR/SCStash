@@ -56,7 +56,7 @@ public class Tools {
 	public static Patient[] addElement(Patient[] array, int index, Patient patient) {
 		Patient[] result = array;
 
-		if (index > result.length) {
+		if (index >= result.length) {
 			result = Arrays.copyOf(array, index);
 		}
 
