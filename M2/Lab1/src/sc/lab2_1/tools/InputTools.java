@@ -53,7 +53,7 @@ public class InputTools {
 
 		while (true) {
 			try {
-				result = getEnumAtIndex(enumerationMember, getPositiveInteger(promptMessage));
+				result = getEnumAtIndex(enumerationMember, getInteger(promptMessage));
 				break;
 			} catch (InvalidCommandException e) {
 				System.out.println(e.getMessage());
@@ -63,22 +63,28 @@ public class InputTools {
 		return result;
 	}
 
-	// Get a member of the specified by enumerationMember enumeration based on its index
-	private static <E extends Enum<E>> E getEnumAtIndex(E enumerationMember, int index) // <-- Type erasure ???
+	// Get a member of the specified by enumerationMember enumeration based on its
+	// ordinal
+	private static <E extends Enum<E>> E getEnumAtIndex(E enumerationMember, int ordinal)
 			throws InvalidCommandException {
-		Class<E> enumClass = enumerationMember.getDeclaringClass();
 		E action = null;
 
-		try {
-			action = E.valueOf(enumerationMember.getDeclaringClass(), enumClass.getEnumConstants()[index].toString());
-		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidCommandException(String.format("%d - is not a valid option, try again.\n", index), e);
+		for (E enumMember : enumerationMember.getDeclaringClass().getEnumConstants()) {
+			if (enumMember.ordinal() == ordinal) {
+				action = enumMember;
+				break;
+			}
+		}
+
+		if (action == null) {
+			throw new InvalidCommandException(String.format("%d - is not a valid option, try again.\n", ordinal));
 		}
 
 		return action;
 	}
 
-	// Get an instance of the Range class (used by PatientTools.findByMedCardInRange)
+	// Get an instance of the Range class (used by
+	// PatientTools.findByMedCardInRange)
 	public static Range getRange() {
 		int n1, n2;
 		n1 = n2 = 0;

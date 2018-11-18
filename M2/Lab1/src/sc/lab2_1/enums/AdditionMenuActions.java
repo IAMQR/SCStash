@@ -1,5 +1,5 @@
 package sc.lab2_1.enums;
 
-public enum PatientAdditionMenuActions {
+public enum AdditionMenuActions {
 	GOBACK, ADDRANDOM, ADDSPECIFIC
 }

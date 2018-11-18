@@ -24,7 +24,7 @@ public class Lab2_1 {
 			break;
 		case ADD:
 			displayPatientAdditionMenu();
-			addPatientExecute(InputTools.getEnum(PatientAdditionMenuActions.GOBACK, "Your choice : "));
+			addPatientExecute(InputTools.getEnum(AdditionMenuActions.GOBACK, "Your choice : "));
 			break;
 		case FIND:
 			displaySearchMenu();
@@ -45,13 +45,13 @@ public class Lab2_1 {
 
 	private static void displayPatientAdditionMenu() {
 		System.out.println("Add patient :");
-		System.out.printf("%d. Generate random\n", PatientAdditionMenuActions.ADDRANDOM.ordinal());
-		System.out.printf("%d. Enter manually\n", PatientAdditionMenuActions.ADDSPECIFIC.ordinal());
-		System.out.printf("%d. Go back\n", PatientAdditionMenuActions.GOBACK.ordinal());
+		System.out.printf("%d. Generate random\n", AdditionMenuActions.ADDRANDOM.ordinal());
+		System.out.printf("%d. Enter manually\n", AdditionMenuActions.ADDSPECIFIC.ordinal());
+		System.out.printf("%d. Go back\n", AdditionMenuActions.GOBACK.ordinal());
 	}
 
 	// Execute an action from the patient addition menu
-	private static void addPatientExecute(PatientAdditionMenuActions action) {
+	private static void addPatientExecute(AdditionMenuActions action) {
 		Patient patient = null;
 
 		switch (action) {
