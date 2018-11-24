@@ -4,7 +4,7 @@ import sc.lab2_1.tools.*;
 import sc.lab2_1.enums.*;
 
 public class Lab2_1 {
-	static final int SIZE = 10; // Initial size of arrays for storing patients
+	static final int SIZE = 10; // Initial size of the array for storing patients
 	private static Patient[] patients = new Patient[SIZE];
 	private static int i;
 

@@ -1,5 +1,7 @@
 package sc.lab2_2;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,38 +21,28 @@ public class Lab2_2 {
 	}
 
 	private static void reverseLines(File inputFile, File outputFile) {
-		try (FileReader fileReader = new FileReader(inputFile)) {
-			Boolean append = false;
+		Boolean append = false;
 
-			// If output file exists
-			if (outputFile.exists()) {
-				System.out.println("Output file already exists.");
-				append = askToAppend(outputFile);
+		// If output file exists
+		if (outputFile.exists()) {
+			System.out.println("Output file already exists.");
+			append = askToAppend(outputFile);
 
-				// If user decides not to append nor overwrite the output file
-				if (append == null) {
-					exit(-1);
-				}
+			// If user decides not to append nor overwrite the output file
+			if (append == null) {
+				exit(-1);
 			}
+		}
 
-			try (FileWriter fileWriter = new FileWriter(outputFile, append)) {
-				char readChar;
-				StringBuilder line = new StringBuilder();
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFile, append))) {
 
-				while ((readChar = (char) fileReader.read()) != (char) -1) {
-					if (readChar == '\n') {
-						line.reverse();
-						line.append(readChar); // Append with the newline character
-						fileWriter.write(line.toString());
-						line.setLength(0); // Clear the buffer
-						continue;
-					}
+			String readLine;
+			StringBuilder line = new StringBuilder();
 
-					line.append(readChar);
-				}
-
-			} catch (Exception e) {
-				throw e;
+			while ((readLine = bufferedReader.readLine()) != null) {
+				bufferedWriter.write(line.append(readLine).reverse().append("\n").toString());
+				line.setLength(0); // Clear the buffer
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

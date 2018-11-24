@@ -53,7 +53,7 @@ public class InputTools {
 
 		while (true) {
 			try {
-				result = getEnumAtIndex(enumerationMember, getInteger(promptMessage));
+				result = getEnumWithOrdinal(enumerationMember, getInteger(promptMessage));
 				break;
 			} catch (InvalidCommandException e) {
 				System.out.println(e.getMessage());
@@ -65,7 +65,7 @@ public class InputTools {
 
 	// Get a member of the specified by enumerationMember enumeration based on its
 	// ordinal
-	private static <E extends Enum<E>> E getEnumAtIndex(E enumerationMember, int ordinal)
+	private static <E extends Enum<E>> E getEnumWithOrdinal(E enumerationMember, int ordinal)
 			throws InvalidCommandException {
 		E action = null;
 
