@@ -8,13 +8,13 @@ public class Lab2_4 {
 	public static void main(String[] args) {
 		PointSetGenerator pointSetGenerator = new PointSetGenerator();
 		HashSet<Point> points = pointSetGenerator.generatePoints(getPositiveInteger("Number of points : "));
-		
-		displayGeneratedPoints(points);
-		
+
+		displayPoints(points);
+		System.out.println();
+
 		Point least = findPointWithLeastDistance(points);
 		if (least != null) {
-			System.out.println(
-					"\nPoint with least total distance to other points : " + String.format("%x", least.hashCode()));
+			System.out.println("\nPoint with least total distance to other points : " + least);
 		}
-	}	
+	}
 }

@@ -30,6 +30,34 @@ public class Point {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Point point = (Point) obj;
+		if (x != point.x) {
+			return false;
+		}
+		return y == point.y;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 0xC5AF;
+
+		long x = Double.doubleToLongBits(this.x);
+		long y = Double.doubleToLongBits(this.y);
+
+		result = 31 * result + (int) (x ^ (x >>> 32));
+		result = 31 * result + (int) (y ^ (y >>> 32));
+
+		return result;
+	}
+
+	@Override
 	public String toString() {
 		return String.format("(%9f, %9f)", x, y);
 	}

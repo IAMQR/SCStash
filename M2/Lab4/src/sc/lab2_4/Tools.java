@@ -26,17 +26,13 @@ public class Tools {
 		return number;
 	}
 
-	public static void displayGeneratedPoints(HashSet<Point> points) {
+	public static void displayPoints(HashSet<Point> points) {
 		if (points == null || points.isEmpty()) {
 			System.out.println("No elements to display");
 			return;
 		}
 
 		System.out.println("Elements (x, y) :");
-		displayPoints(points);
-	}
-
-	public static void displayPoints(HashSet<Point> points) {
 		for (Point point : points) {
 			System.out.println(point);
 		}
@@ -49,8 +45,7 @@ public class Tools {
 		for (Point point : points) {
 			double tempSum = calculateSumDistance(point, points);
 
-			System.out.printf("Point %s %s, total distance to others : %f\n", String.format("%8x", point.hashCode()),
-					point, tempSum);
+			System.out.printf("Point %s, total distance to others : %f\n", point, tempSum);
 			if (tempSum < sum) {
 				result = point;
 				sum = tempSum;
